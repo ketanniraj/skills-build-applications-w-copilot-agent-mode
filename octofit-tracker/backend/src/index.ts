@@ -1,5 +1,5 @@
 import express from 'express';
-import { apiBaseUrl } from './config/apiUrl';
+import { apiBaseUrl, apiPort } from './config/apiUrl';
 import './config/database';
 import activitiesRouter from './routes/activities';
 import leaderboardRouter from './routes/leaderboard';
@@ -8,7 +8,7 @@ import usersRouter from './routes/users';
 import workoutsRouter from './routes/workouts';
 
 const app = express();
-const port = Number(process.env.PORT) || 8000;
+const port = Number(process.env.PORT) || apiPort;
 
 app.use(express.json());
 
