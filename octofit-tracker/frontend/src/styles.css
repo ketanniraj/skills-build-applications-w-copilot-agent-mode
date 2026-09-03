@@ -1,0 +1,29 @@
+body {
+  background: #f5f7fb;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.navbar-brand img {
+  background: #ffffff;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.navbar-nav .nav-link.active {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+}
+
+.data-page .text-muted {
+  word-break: break-word;
+}
+
+td {
+  max-width: 24rem;
+  overflow-wrap: anywhere;
+}
