@@ -4,8 +4,12 @@ export const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev/api`
   : 'http://localhost:8000/api';
 
-export function getApiUrl(resource) {
-  return `${apiBaseUrl}/${resource}/`;
+export function getApiUrl(resourceOrUrl) {
+  if (resourceOrUrl.startsWith('http://') || resourceOrUrl.startsWith('https://')) {
+    return resourceOrUrl;
+  }
+
+  return `${apiBaseUrl}/${resourceOrUrl}/`;
 }
 
 export function normalizeApiResponse(payload) {

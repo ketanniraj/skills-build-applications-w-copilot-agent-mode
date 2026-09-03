@@ -13,10 +13,11 @@ function formatValue(value) {
   return String(value);
 }
 
-function DataPage({ title, resource, columns, emptyMessage }) {
+function DataPage({ title, resource, endpoint = resource, columns, emptyMessage }) {
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('loading');
   const [error, setError] = useState('');
+  const apiUrl = getApiUrl(endpoint);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -24,7 +25,7 @@ function DataPage({ title, resource, columns, emptyMessage }) {
     async function loadItems() {
       try {
         setStatus('loading');
-        setItems(await fetchCollection(resource, { signal: controller.signal }));
+        setItems(await fetchCollection(endpoint, { signal: controller.signal }));
         setStatus('ready');
       } catch (caughtError) {
         if (caughtError.name !== 'AbortError') {
@@ -37,14 +38,14 @@ function DataPage({ title, resource, columns, emptyMessage }) {
     loadItems();
 
     return () => controller.abort();
-  }, [resource]);
+  }, [endpoint]);
 
   return (
     <section className="data-page">
       <div className="d-flex flex-column flex-md-row justify-content-between gap-2 mb-3">
         <div>
           <h1 className="h3 mb-1">{title}</h1>
-          <p className="text-muted mb-0">{getApiUrl(resource)}</p>
+          <p className="text-muted mb-0">{apiUrl}</p>
         </div>
       </div>
 
